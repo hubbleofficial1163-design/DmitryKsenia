@@ -820,7 +820,7 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 30vh; /* Используем vh (процент от высоты экрана) вместо пикселей */
+    bottom: 27vh; /* Используем vh (процент от высоты экрана) вместо пикселей */
     z-index: 10;
     width: auto;
     display: flex;
@@ -830,19 +830,19 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
 /* Коррекция для разных высот экрана */
 @media (max-height: 700px) {
     .music-player {
-        bottom: 12vh; /* Для низких экранов опускаем ниже */
+        bottom: 22vh; /* Для низких экранов опускаем ниже */
     }
 }
 
 @media (max-height: 600px) {
     .music-player {
-        bottom: 8vh; /* Для очень низких экранов ещё ниже */
+        bottom: 28vh; /* Для очень низких экранов ещё ниже */
     }
 }
 
 @media (min-height: 900px) {
     .music-player {
-        bottom: 18vh; /* Для высоких экранов поднимаем выше */
+        bottom: 28vh; /* Для высоких экранов поднимаем выше */
     }
 }
 
