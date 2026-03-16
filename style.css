@@ -831,7 +831,7 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
 /* Коррекция для разных высот экрана */
 @media (max-width: 380px) {
     .music-player {
-        bottom: 80px;
+        bottom: 150px;
     }
     
     .music-circle {
