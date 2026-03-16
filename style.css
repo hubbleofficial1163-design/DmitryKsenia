@@ -1,0 +1,917 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    background: url('1.jpg') no-repeat center center / cover;
+    display: flex;
+}
+
+.hero-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 20px 28px;
+    text-align: center;
+}
+
+/* Имена в столбик — элегантный шрифт */
+.names-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0px; /* минимальный отступ для благородного вида */
+}
+
+.name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 6px rgba(255, 255, 255, 0.5);
+}
+
+/* Второе имя чуть тоньше для контраста */
+.name:last-child {
+    font-weight: 600;
+    margin-top: -4px; /* небольшая коррекция межстрочного */
+}
+
+/* Секция с таймером */
+.timer-section {
+    margin-top: auto; /* auto означает "максимально возможный отступ сверху" */
+    margin-bottom: 20px;
+}
+
+.handwritten {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2rem, 7vw, 2.6rem);
+    color: #fff;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Общая подложка для всего таймера */
+.timer-wrapper {
+    background: rgba(255, 255, 255, 0.4);  /* светло-прозрачная, как просили */
+    backdrop-filter: blur(4px);
+    border-radius: 30px;
+    padding: 20px 16px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.timer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 12px;
+}
+
+.timer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 45px;
+    color: #000;  /* черный шрифт */
+}
+
+.timer-number {
+    font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    font-size: clamp(1.1rem, 6vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.timer-label {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Дата внизу */
+.date-section {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 13vw, 6rem);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 12px;
+    line-height: 1;
+}
+
+.day-month {
+    color: #000;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.4);
+}
+
+.year {
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 380px) {
+    .timer-wrapper {
+        padding: 15px 10px;
+    }
+    .timer-item {
+        min-width: 48px;
+    }
+    .timer-number {
+        font-size: 1.3rem;
+    }
+    .timer-label {
+        font-size: 0.6rem;
+    }
+    .date-section {
+        font-size: 2.8rem;
+        gap: 6px;
+    }
+}
+
+
+/* Секция 2: Приглашение */
+.invitation {
+    width: 100%;
+    min-height: 100vh;
+    background: url('3.webp') no-repeat center center / cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0px;
+}
+
+.invitation-content {
+    max-width: none;
+    width: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85); /* чуть плотнее фон вместо размытия */
+    border-radius: 0;
+    padding: 40px 0px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.greeting {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.invite-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    color: #000;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.photo-confirm {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto 30px;
+}
+
+.confirm-photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto;
+}
+
+.photo-caption {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #000;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 15px;
+    border-radius: 40px;
+    /* backdrop-filter: blur(2px); */
+}
+
+.dress-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-weight: 500;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.color-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s;
+}
+
+.color-circle:hover {
+    transform: scale(1.1);
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 380px) {
+    .confirm-photo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .color-circle {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .invitation-content {
+        padding: 30px 15px;
+    }
+}
+
+
+/* Секция 3: Вопросы от жениха и невесты */
+.questions {
+    width: 100%;
+    min-height: 100vh;
+    background: url('3.webp') no-repeat center center / cover;
+    display: flex;
+    align-items: flex-end; /* подложка будет внизу, а над ней видно фон */
+    padding: 0;
+}
+
+.questions-content {
+    width: 100%;
+    background: #fff; /* полностью белая подложка */
+    padding: 40px 20px;
+    border-radius: 40px 40px 0 0; /* скругление только сверху */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.questions-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    padding: 0 10px;
+}
+
+.questions-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background: #f9f9f9;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #000000;
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.radio-group.vertical {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-label, .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"], 
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #000000; /* цвет для радио-кнопок и чекбоксов */
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+}
+
+.checkbox-label {
+    flex: 0 0 auto;
+    width: calc(50% - 10px); /* по 2 в ряд */
+    min-width: 130px;
+}
+
+.submit-btn {
+    background: #000000;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 18px 30px;
+    border: none;
+    border-radius: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:hover {
+    background: #245E38;
+    transform: scale(1.02);
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 480px) {
+    .checkbox-label {
+        width: 100%; /* на маленьких экранах по одному в ряд */
+    }
+    
+    .questions-intro {
+        font-size: 1.4rem;
+    }
+    
+    .form-group label {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .questions-content {
+        padding: 30px 15px;
+    }
+    
+    .radio-group {
+        gap: 10px;
+    }
+    
+    .radio-label, .checkbox-label {
+        font-size: 1rem;
+    }
+}
+
+
+/* Секция 4: Свадебное расписание */
+.schedule {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;  /* чисто белый фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.schedule-content {
+    max-width: 600px;
+    width: 100%;
+}
+
+.schedule-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    color: #000;
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.1;
+}
+
+.schedule-table {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.schedule-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000;
+    min-width: 80px;
+    line-height: 1.2;
+}
+
+.description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: #000;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-title {
+    font-weight: 600;
+}
+
+.address {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 4px;
+}
+
+.note-row {
+    margin-left: 0;  /* без дополнительного отступа */
+}
+
+.note {
+    font-family: 'Caveat', cursive;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #000;
+    padding-right: 10px;
+}
+
+/* Заглушка для карты */
+.map-placeholder {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #999;
+    text-align: center;
+    padding: 40px 20px;
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    background: #fafafa;
+    letter-spacing: 1px;
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 480px) {
+    .schedule-row {
+        gap: 15px;
+    }
+    
+    .time {
+        font-size: 1.6rem;
+        min-width: 70px;
+    }
+    
+    .description {
+        font-size: 1.1rem;
+    }
+    
+    .note {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .schedule-title {
+        font-size: 2.8rem;
+    }
+    
+    .time {
+        font-size: 1.5rem;
+        min-width: 60px;
+    }
+    
+    .schedule-content {
+        padding: 30px 15px;
+    }
+}
+
+/* Футер с контактами */
+.contacts-footer {
+    width: 100%;
+    background: #ffffff;  /* темно-коричневый цвет из палитры */
+    color: #000000;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #000000;
+}
+
+.contact-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  /* это уже есть - центрирует всю строку */
+    align-items: center;      /* добавляем для вертикального центрирования */
+    gap: 8px;
+    text-align: center;       /* добавляем для выравнивания текста внутри */
+}
+
+.contact-name {
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+.contact-phone {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+    transition: border-color 0.2s;
+}
+
+.contact-phone:hover {
+    border-bottom-color: #000000;
+}
+
+.contact-role {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+.footer-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 30px;
+    font-style: italic;
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 480px) {
+    .footer-title {
+        font-size: 2.2rem;
+    }
+    
+    .contact-item {
+        font-size: 1.4rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .contact-role {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .contacts-footer {
+        padding: 40px 15px;
+    }
+    
+    .footer-title {
+        font-size: 2rem;
+    }
+    
+    .contact-item {
+        font-size: 1.3rem;
+    }
+}
+
+
+/* Секция 5: Пожелания и подарки */
+.wishes {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;  /* белый фон, как у расписания */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.wishes-content {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.wishes-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    color: #000;
+    margin-bottom: 40px;
+    line-height: 1.1;
+}
+
+.wishes-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: #000;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.flowers-text {
+    font-style: italic;
+    color: #493826;  /* акцентный цвет для важной информации */
+    background: rgba(73, 56, 38, 0.05);
+    padding: 25px 20px;
+    border-radius: 30px;
+    margin: 30px 0;
+}
+
+.flower-link {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.flower-button {
+    background: #000000;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(73, 56, 38, 0.3);
+    border: 2px solid transparent;
+}
+
+.flower-button:hover {
+    background: #fff;
+    color: #000000;
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(73, 56, 38, 0.4);
+}
+
+.flower-button:active {
+    transform: translateY(0);
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 480px) {
+    .wishes-text {
+        font-size: 1.2rem;
+    }
+    
+    .flowers-text {
+        padding: 20px 15px;
+    }
+    
+    .flower-button {
+        font-size: 1.3rem;
+        padding: 15px 30px;
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 380px) {
+    .wishes {
+        padding: 40px 15px;
+    }
+    
+    .wishes-title {
+        font-size: 2.8rem;
+    }
+    
+    .wishes-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* Убираем синее выделение при нажатии на мобильных устройствах */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* Для ссылок и кнопок дополнительно */
+a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-label {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+/* Убираем стандартное выделение при фокусе (но оставляем для доступности) */
+:focus {
+    outline: none;
+}
+
+/* Для пользователей, которые используют клавиатуру - показываем фокус (доступность) */
+:focus-visible {
+    outline: 2px solid #493826;
+    outline-offset: 2px;
+}
+
+
+/* Стили для поля с пожеланиями */
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background: #f9f9f9;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical; /* позволяет менять высоту, но не ширину */
+    min-height: 80px;
+    max-height: 200px;
+}
+
+.form-group textarea:focus {
+    border-color: #493826;
+}
+
+
+/* Музыкальный плеер с круговым текстом */
+.music-player {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    bottom: 300px; /* Увеличили число → подняли выше */
+    z-index: 10;
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.music-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rotating-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotate 12s linear infinite;
+}
+
+.rotating-text text {
+    fill: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.music-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    border: 2px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: #000;
+    z-index: 2;
+    position: relative;
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.music-btn.playing {
+    background: #3c3c3c;
+    color: white;
+}
+
+.music-icon {
+    width: 30px;
+    height: 30px;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* При воспроизведении ускоряем вращение текста */
+.music-btn.playing ~ .rotating-text {
+    animation-duration: 6s;
+}
+
+/* Адаптация */
+@media (max-width: 380px) {
+    .music-circle {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .music-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .music-icon {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .rotating-text {
+        font-size: 10px;
+    }
+}

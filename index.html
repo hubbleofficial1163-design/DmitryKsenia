@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Дмитрий & Ксения | Свадьба</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Элегантные шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <section class="hero">
+        <div class="hero-content">
+
+            
+
+            <!-- Имена в столбик сверху -->
+            <div class="names-column">
+                <span class="name">ДМИТРИЙ</span>
+                <span class="name">КСЕНИЯ</span>
+            </div>
+
+            <div class="music-player">
+                <div class="music-circle">
+                    <svg class="rotating-text" viewBox="0 0 100 100">
+                        <defs>
+                            <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+                        </defs>
+                        <text font-size="12">
+                            <textPath href="#circle" fill="white" font-family="Caveat, cursive">
+                                • ВКЛЮЧИТЕ МУЗЫКУ • ВКЛЮЧИТЕ МУЗЫКУ •
+                            </textPath>
+                        </text>
+                    </svg>
+                    <button class="music-btn" id="musicToggle">
+                        <svg class="music-icon" viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+                <audio id="bgMusic" loop>
+                    <source src="1.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <!-- Центральная часть с таймером -->
+            <div class="timer-section">
+                <p class="handwritten">Встречаемся через:</p>
+                <div class="timer-wrapper">
+                    <div class="timer" id="timer">
+                        <div class="timer-item">
+                            <span class="timer-number" id="weeks">0</span>
+                            <span class="timer-label">недель</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="days">0</span>
+                            <span class="timer-label">дней</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="hours">0</span>
+                            <span class="timer-label">часов</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="minutes">0</span>
+                            <span class="timer-label">минут</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="seconds">0</span>
+                            <span class="timer-label">секунд</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дата внизу -->
+            <div class="date-section">
+                <span class="day-month">01.08</span>
+                <span class="year">2026</span>
+            </div>
+        </div>
+    </section>
+
+        <!-- Секция 2: Приглашение -->
+    <section class="invitation">
+        <div class="invitation-content">
+            <h2 class="greeting">Дорогой <br> Гость!</h2>
+            
+            <p class="message">Мы рады сообщить Вам, что 01.08.2026 состоится важный день в нашей жизни — мы официально станем семьей!</p>
+            
+            <p class="invite-text">Приглашаем Вас разделить с нами радость этого незабываемого события</p>
+            
+            <div class="photo-confirm">
+                <img src="2.jpg" alt="Подтверждение присутствия" class="confirm-photo">
+                <span class="photo-caption">Пожалуйста, подтвердите свое присутствие до 15.06.2026</span>
+            </div>
+            
+            <p class="dress-hint">Будем благодарны, если при выборе нарядов на наше торжество, вы придержитесь пастельных или неярких оттенков, например:</p>
+            
+            <div class="color-palette">
+                <div class="color-circle" style="background-color: #000000;" title="#000000"></div>
+                <div class="color-circle" style="background-color: #493826;" title="#493826"></div>
+                <div class="color-circle" style="background-color: #245E38;" title="#245E38"></div>
+                <div class="color-circle" style="background-color: #D7A5B1;" title="#D7A5B1"></div>
+                <div class="color-circle" style="background-color: #E0C397;" title="#E0C397"></div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Секция 3: Вопросы от жениха и невесты -->
+    <section class="questions">
+        <div class="questions-content">
+            <p class="questions-intro">Пожалуйста, ответьте на вопросы, которые для вас подготовили Жених и Невеста:</p>
+            
+            <form class="questions-form" id="weddingForm">
+                <!-- Имя и фамилия -->
+                <div class="form-group">
+                    <label for="fullname">Ваши имя и фамилия</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Например: Иван Иванов" required>
+                </div>
+                
+                <!-- Количество гостей -->
+                <div class="form-group">
+                    <label>Количество гостей, которое придет с вами</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="guests" value="1" checked> 1
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="guests" value="я+1"> я+1
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="guests" value="я+2"> я+2
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="guests" value="я+3"> я+3
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="guests" value="я+4"> я+4
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="guests" value="я+5"> я+5
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Приезд на мероприятия -->
+                <div class="form-group">
+                    <label>Вы приедете... (Ниже можно ознакомиться с таймингом)</label>
+                    <div class="radio-group vertical">
+                        <label class="radio-label">
+                            <input type="radio" name="attendance" value="zags" checked> в ЗАГС
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attendance" value="banquet"> на банкет
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attendance" value="absent"> к сожалению, не смогу прийти
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Особые предпочтения по еде -->
+                <div class="form-group">
+                    <label>Есть ли у Вас особые предпочтения по еде или аллергии?</label>
+                    <div class="radio-group vertical">
+                        <label class="radio-label">
+                            <input type="radio" name="food" value="no" checked> нет
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="food" value="no-meat"> не ем мясо
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="food" value="no-fish"> не ем рыбу
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="food" value="personal"> сообщу лично
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Предпочтения по алкоголю -->
+                <div class="form-group">
+                    <label>Какой алкоголь Вы предпочитаете?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="red_wine"> Красное вино
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="white_wine"> Белое вино
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="champagne"> Шампанское
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="whiskey"> Виски
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="cognac"> Коньяк
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="vodka"> Водка
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="alcohol" value="none"> не буду пить алкоголь
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Ребенок на празднике -->
+                <div class="form-group">
+                    <label>Будет ли с вами на празднике ребенок?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="child" value="yes"> Да
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="child" value="no" checked> Нет
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 👇 НОВОЕ ПОЛЕ: Ваши пожелания -->
+                <div class="form-group">
+                    <label for="wishes">Ваши пожелания молодоженам</label>
+                    <textarea id="wishes" name="wishes" rows="3" placeholder="Напишите свои пожелания Дмитрию и Ксении..."></textarea>
+                </div>
+                
+                <!-- Кнопка отправки -->
+                <button type="submit" class="submit-btn">Отправить ответы</button>
+            </form>
+        </div>
+    </section>
+
+        <!-- Секция 4: Свадебное расписание -->
+    <section class="schedule">
+        <div class="schedule-content">
+            <h2 class="schedule-title">Свадебное расписание</h2>
+            
+            <div class="schedule-table">
+                <!-- Первое событие: регистрация -->
+                <div class="schedule-row">
+                    <div class="time">15:20</div>
+                    <div class="description">
+                        <span class="event-title">Церемония регистрации в Таганском Дворие бракосочетания</span>
+                        <span class="address">Таганская ул. 44</span>
+                    </div>
+                </div>
+                
+                <!-- Пояснение к регистрации (отдельная строка с отступом) -->
+                <div class="schedule-row note-row">
+                    <div class="time"></div> <!-- пустая ячейка для выравнивания -->
+                    <div class="description note">
+                        Церемония регистрации пройдет до начала основного праздника. Присутствие необязательно, но Вы можете присоединиться к нам при желании
+                    </div>
+                </div>
+                
+                <!-- Второе событие: сбор гостей -->
+                <div class="schedule-row">
+                    <div class="time">16:00</div>
+                    <div class="description">
+                        <span class="event-title">Сбор гостей</span>
+                        <span class="address">Ya-cafe 2, м. Автозаводская, ул. Ленинская Слобода, д. 19, стр. 2</span>
+                    </div>
+                </div>
+                
+                <!-- Третье событие: окончание -->
+                <div class="schedule-row">
+                    <div class="time">23:00</div>
+                    <div class="description">
+                        <span class="event-title">Окончание праздника</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Заглушка для карты -->
+            <!-- Карта Яндекса -->
+            <div class="yandex-map">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2e22bf355e3504400642aa9c466b07bea4de69387f9e09af246fa1a33f2996&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
+            </div>
+        </div>
+    </section>
+
+        <!-- Секция 5: Пожелания и подарки -->
+    <section class="wishes">
+        <div class="wishes-content">
+            <h2 class="wishes-title">Пожелания</h2>
+            
+            <p class="wishes-text">В качестве подарка мы будем рады вкладу в бюджет нашей семьи. Он точно поможет воплотить нашу мечту в реальность!</p>
+            
+            <p class="wishes-text flowers-text">Мы мечтаем, чтобы эмоции от нашей свадьбы остались в памяти на долгие месяцы, поэтому вместо букетов от вас на торжество, мы выбрали цветочную подписку — возможность получать ваши поздравления в виде свежих букетов каждую неделю после праздника.</p>
+            
+            <p class="wishes-text">Если вы хотите внести вклад в нашу подписку, просто перейдите по ссылке:</p>
+            
+            <a href="https://bloomles.ru/" class="flower-link" target="_blank" rel="noopener noreferrer">
+                <button class="flower-button">Перейти к цветочной подписке</button>
+            </a>
+        </div>
+    </section>
+
+        <!-- Футер с контактами -->
+    <footer class="contacts-footer">
+        <div class="footer-content">
+            <h3 class="footer-title">Контакты для связи</h3>
+            <div class="contact-item">
+                <span class="contact-name">Михаил <br><a href="tel:+79859378063" class="contact-phone">+7 (985) 937-80-63</a></span>
+            </div>
+            <p class="footer-note">По любым вопросам обращайтесь к нашему организатору</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
