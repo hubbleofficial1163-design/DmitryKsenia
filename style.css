@@ -817,35 +817,34 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
 
 /* Музыкальный плеер с круговым текстом */
 .music-player {
-    position: fixed; /* fixed вместо absolute */
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 200px; /* Фиксированный отступ от низа окна браузера */
+    bottom: 15vh; /* Используем vh (процент от высоты экрана) вместо пикселей */
     z-index: 10;
     width: auto;
     display: flex;
     justify-content: center;
-    pointer-events: none; /* Чтобы клики проходили сквозь пустые области */
 }
 
 /* Коррекция для разных высот экрана */
-@media (max-width: 380px) {
+@media (max-height: 700px) {
     .music-player {
-        bottom: 150px;
-    }
-    
-    .music-circle {
-        width: 100px;
-        height: 100px;
+        bottom: 12vh; /* Для низких экранов опускаем ниже */
     }
 }
 
-/* Для экранов с безопасной зоной (iPhone с "челкой") */
-/* @supports (padding: max(0px)) {
+@media (max-height: 600px) {
     .music-player {
-        bottom: max(20px, 100px); /* Минимум 20px, предпочтительно 100px 
+        bottom: 8vh; /* Для очень низких экранов ещё ниже */
     }
-} */
+}
+
+@media (min-height: 900px) {
+    .music-player {
+        bottom: 18vh; /* Для высоких экранов поднимаем выше */
+    }
+}
 
 .music-circle {
     position: relative;
