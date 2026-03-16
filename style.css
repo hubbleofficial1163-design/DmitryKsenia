@@ -820,7 +820,7 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15vh; /* Используем vh (процент от высоты экрана) вместо пикселей */
+    bottom: 30vh; /* Используем vh (процент от высоты экрана) вместо пикселей */
     z-index: 10;
     width: auto;
     display: flex;
