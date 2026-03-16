@@ -820,7 +820,7 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
     position: absolute;
     left: 50%;
     transform: translateX(-50%); /* Центрирование по горизонтали */
-    bottom: 300px; /* Увеличили число → подняли выше */
+    bottom: 250px; /* Увеличили число → подняли выше */
     z-index: 10;
     width: auto;
     display: flex;
