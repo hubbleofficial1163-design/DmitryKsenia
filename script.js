@@ -72,17 +72,6 @@ function submitForm(form) {
     const alcoholCheckboxes = form.querySelectorAll('input[type="checkbox"][name="alcohol"]:checked');
     const alcoholValues = Array.from(alcoholCheckboxes).map(cb => cb.value);
     
-    // Базовая структура данных
-    const data = {
-        fullname: formData.get('fullname'),
-        guests: formData.get('guests'),
-        attendance: formData.get('attendance'),
-        food: formData.get('food'),
-        child: formData.get('child'),
-        wishes: formData.get('wishes') || '',
-        alcohol: alcoholValues.join(', ') // объединяем все алкоголь в строку
-    };
-    
     // Показываем индикатор загрузки
     const submitBtn = form.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
@@ -92,24 +81,39 @@ function submitForm(form) {
     // URL вашего Google Apps Script
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxNu7lxBi_TO6zjGQzo7II2bDKppkHizajBcEau_BCyiZevdWP-AIZqy3ZFoOgvMp3UXg/exec';
     
-    // Создаем FormData для отправки
-    const sendData = new FormData();
-    sendData.append('fullname', data.fullname);
-    sendData.append('guests', data.guests);
-    sendData.append('attendance', data.attendance);
-    sendData.append('food', data.food);
-    sendData.append('child', data.child);
-    sendData.append('wishes', data.wishes);
-    sendData.append('alcohol', data.alcohol);
+    // Создаем объект с данными
+    const data = {
+        fullname: formData.get('fullname') || '',
+        guests: formData.get('guests') || '',
+        attendance: formData.get('attendance') || '',
+        food: formData.get('food') || '',
+        child: formData.get('child') || '',
+        wishes: formData.get('wishes') || ''
+    };
     
-    // Отправляем через fetch с режимом no-cors
+    // Добавляем алкоголь как отдельные параметры (для совместимости с Apps Script)
+    alcoholValues.forEach((value, index) => {
+        data[`alcohol_${index}`] = value;
+    });
+    
+    // Если алкоголь не выбран, добавляем пустое значение
+    if (alcoholValues.length === 0) {
+        data.alcohol = '';
+    }
+    
+    // Создаем FormData для отправки (более надежно, чем URLSearchParams)
+    const formDataToSend = new FormData();
+    for (let key in data) {
+        formDataToSend.append(key, data[key]);
+    }
+    
+    // Отправляем через fetch с правильными заголовками
     fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors', // Это позволяет обойти CORS, но ответ не прочитать
-        body: sendData
+        mode: 'no-cors',
+        body: formDataToSend
     })
     .then(() => {
-        // При no-cors мы не можем прочитать ответ, поэтому просто показываем успех
         showNotification('Спасибо! Ваши ответы успешно отправлены!', 'success');
         form.reset();
     })
