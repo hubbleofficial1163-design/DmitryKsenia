@@ -12,6 +12,7 @@ body, html {
 .hero {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     background: url('1.jpg') no-repeat center center / cover;
     display: flex;
 }
@@ -20,9 +21,13 @@ body, html {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 32px 20px 28px;
+    /* Убираем space-between */
+    /* justify-content: space-between; */
+    justify-content: flex-start; /* Элементы идут сверху */
+    padding: 32px 20px 20px;
     text-align: center;
+    min-height: 100vh; /* Запасной вариант */
+    min-height: 100dvh; /* Современный вариант */
 }
 
 /* Имена в столбик — элегантный шрифт */
@@ -33,9 +38,9 @@ body, html {
 }
 
 .name {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Infant', serif;
     font-size: clamp(2.8rem, 12vw, 4rem);
-    font-weight: 700;
+    font-weight: 300;  /* Light начертание */
     line-height: 1;
     color: #000;
     letter-spacing: 4px;
@@ -45,14 +50,14 @@ body, html {
 
 /* Второе имя чуть тоньше для контраста */
 .name:last-child {
-    font-weight: 600;
-    margin-top: -4px; /* небольшая коррекция межстрочного */
+    font-weight: 300;  /* тоже Light, можно оставить одинаковым */
+    margin-top: -4px;
 }
 
 /* Секция с таймером */
 .timer-section {
-    margin-top: auto; /* auto означает "максимально возможный отступ сверху" */
-    margin-bottom: 20px;
+    margin-top: 0;
+    margin-bottom: 0px;
 }
 
 .handwritten {
@@ -108,14 +113,19 @@ body, html {
 
 /* Дата внизу */
 .date-section {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Infant', serif;
     font-size: clamp(4.5rem, 13vw, 6rem);
-    font-weight: 700;
+    font-weight: 300;
     display: flex;
     justify-content: center;
     align-items: baseline;
     gap: 12px;
-    line-height: 1;
+    line-height: 0.8;
+    margin: 0;
+    padding: 0;
+    margin-top: auto; /* Отталкивается от верхних элементов */
+    margin-bottom: 30px; /* Фиксированный отступ от нижнего края экрана */
+    /* НИКАКИХ margin-bottom, margin-top, transform */
 }
 
 .day-month {
@@ -142,18 +152,18 @@ body, html {
     .timer-label {
         font-size: 0.6rem;
     }
-    .date-section {
-        font-size: 2.8rem;
-        gap: 6px;
-    }
 }
+
+
+
+
 
 
 /* Секция 2: Приглашение */
 .invitation {
     width: 100%;
     min-height: 100vh;
-    background: url('3.webp') no-repeat center center / cover;
+    background: url('3.jpg') no-repeat center center / cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -281,7 +291,8 @@ body, html {
 .questions {
     width: 100%;
     min-height: 100vh;
-    background: url('3.webp') no-repeat center center / cover;
+    background: color #ffffff;
+    /* url('3.jpg') no-repeat center center / cover; */
     display: flex;
     align-items: flex-end; /* подложка будет внизу, а над ней видно фон */
     padding: 0;
