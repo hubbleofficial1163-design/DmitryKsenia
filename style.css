@@ -13,7 +13,7 @@ body, html {
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    background: url('1.jpg') no-repeat center center / cover;
+    background: url('1.jpg') no-repeat 43% center / cover;
     display: flex;
 }
 
@@ -163,7 +163,7 @@ body, html {
 .invitation {
     width: 100%;
     min-height: 100vh;
-    background: url('3.jpg') no-repeat center center / cover;
+    background: url('4.jpg') no-repeat center center / cover;
     display: flex;
     align-items: center;
     justify-content: center;
