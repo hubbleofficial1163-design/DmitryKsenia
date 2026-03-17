@@ -6,7 +6,6 @@ function updateTimer() {
     const diffMs = targetDate - now;
 
     if (diffMs <= 0) {
-        document.getElementById('weeks').textContent = '0';
         document.getElementById('days').textContent = '0';
         document.getElementById('hours').textContent = '0';
         document.getElementById('minutes').textContent = '0';
@@ -15,94 +14,17 @@ function updateTimer() {
     }
 
     let totalSeconds = Math.floor(diffMs / 1000);
-
-    // const weeks = Math.floor(totalSeconds / (7 * 24 * 3600));
-    // totalSeconds %= (7 * 24 * 3600);
-
     const days = Math.floor(totalSeconds / (24 * 3600));
     totalSeconds %= (24 * 3600);
-
     const hours = Math.floor(totalSeconds / 3600);
     totalSeconds %= 3600;
-
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
-    // document.getElementById('weeks').textContent = weeks;
     document.getElementById('days').textContent = days;
     document.getElementById('hours').textContent = hours;
     document.getElementById('minutes').textContent = minutes;
     document.getElementById('seconds').textContent = seconds;
-}
-
-// ==============================================
-// ОТПРАВКА ФОРМЫ В GOOGLE TABLES - УПРОЩЕННАЯ ВЕРСИЯ
-// ==============================================
-
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfuknuJenlqpkk9CUoPgyIEc04VO5wmH-2L1oR0IAyFwPR5O4cFtNnxIIqF7AwB-tQ/exec';
-
-// Функция для отправки данных
-async function submitForm(form) {
-    const submitBtn = document.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Отправка...';
-    submitBtn.disabled = true;
-    
-    try {
-        // Собираем данные из формы
-        const formData = new FormData(form);
-        
-        // Создаем URL с параметрами
-        const url = new URL(APPS_SCRIPT_URL);
-        
-        // Добавляем timestamp
-        url.searchParams.append('_t', Date.now());
-        
-        // Перебираем все поля формы
-        for (let [key, value] of formData.entries()) {
-            // Для алкоголя добавляем каждый элемент отдельно
-            if (key === 'alcohol') {
-                url.searchParams.append('alcohol', value);
-                console.log(`Добавлен алкоголь: ${value}`);
-            } else {
-                url.searchParams.append(key, value);
-                console.log(`Добавлено поле ${key}: ${value}`);
-            }
-        }
-        
-        console.log('Отправка на URL:', url.toString());
-        
-        // Отправляем запрос
-        await fetch(url.toString(), {
-            method: 'GET',
-            mode: 'no-cors' // Важно для Google Apps Script
-        });
-        
-        // Показываем успех (с небольшой задержкой)
-        setTimeout(() => {
-            showNotification('Спасибо! Ваши ответы получены. Ждем вас на свадьбе!', 'success');
-            form.reset();
-            
-            // Сбрасываем чекбоксы
-            const noAlcoholCheckbox = document.querySelector('input[type="checkbox"][value="none"]');
-            if (noAlcoholCheckbox) {
-                noAlcoholCheckbox.checked = false;
-                document.querySelectorAll('input[type="checkbox"][name="alcohol"]').forEach(cb => {
-                    cb.disabled = false;
-                    cb.checked = false;
-                });
-            }
-            
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
-        
-    } catch (error) {
-        console.error('Ошибка:', error);
-        showNotification('Ошибка отправки. Свяжитесь с организатором: Михаил +7 985 937 8063', 'error');
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }
 }
 
 // Функция для показа уведомлений
@@ -138,6 +60,109 @@ function showNotification(message, type = 'success') {
         notification.style.animation = 'fadeOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 5000);
+}
+
+// Функция отправки формы через JSONP (работает на GitHub Pages)
+function submitForm(form) {
+    // Собираем данные из формы
+    const formData = new FormData(form);
+    
+    // === ИСПРАВЛЕНО: правильный сбор ВСЕХ чекбоксов алкоголя ===
+    const alcoholCheckboxes = form.querySelectorAll('input[type="checkbox"][name="alcohol"]:checked');
+    const alcoholValues = Array.from(alcoholCheckboxes).map(cb => cb.value);
+    
+    // Базовая структура данных
+    const data = {
+        fullname: formData.get('fullname'),
+        guests: formData.get('guests'),
+        attendance: formData.get('attendance'),
+        food: formData.get('food'),
+        child: formData.get('child'),
+        wishes: formData.get('wishes') || ''
+    };
+    
+    // Показываем индикатор загрузки
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.disabled = true;
+    
+    // Генерируем уникальное имя callback функции
+    const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+    
+    // URL вашего Google Apps Script веб-приложения
+    // ЗАМЕНИТЕ НА ВАШ URL ПОСЛЕ ПУБЛИКАЦИИ
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNu7lxBi_TO6zjGQzo7II2bDKppkHizajBcEau_BCyiZevdWP-AIZqy3ZFoOgvMp3UXg/exec';
+    
+    // Создаем URL с параметрами
+    const params = new URLSearchParams();
+    params.append('callback', callbackName);
+    
+    // Добавляем основные данные
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            params.append(key, data[key]);
+        }
+    }
+    
+    // === ИСПРАВЛЕНО: добавляем КАЖДЫЙ выбранный алкоголь отдельным параметром ===
+    // Это гарантирует, что ВСЕ значения попадут в таблицу
+    if (alcoholValues.length > 0) {
+        alcoholValues.forEach((value, index) => {
+            // Добавляем каждый алкоголь с уникальным ключом
+            params.append(`alcohol_${index}`, value);
+        });
+        // Также добавляем счетчик, чтобы на сервере знали, сколько их
+        params.append('alcoholCount', alcoholValues.length);
+    }
+    
+    const url = scriptURL + '?' + params.toString();
+    
+    // Создаем JSONP callback
+    window[callbackName] = function(response) {
+        try {
+            if (response.result === 'success') {
+                showNotification('Спасибо! Ваши ответы успешно отправлены!', 'success');
+                form.reset();
+            } else {
+                showNotification('Ошибка при отправке: ' + response.message, 'error');
+            }
+        } catch (e) {
+            showNotification('Произошла ошибка при обработке ответа', 'error');
+        } finally {
+            // Удаляем скрипт и callback
+            document.body.removeChild(script);
+            delete window[callbackName];
+            
+            // Восстанавливаем кнопку
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    };
+    
+    // Создаем и добавляем скрипт для JSONP запроса
+    const script = document.createElement('script');
+    script.src = url;
+    script.onerror = function() {
+        showNotification('Ошибка соединения. Пожалуйста, проверьте интернет и попробуйте снова.', 'error');
+        document.body.removeChild(script);
+        delete window[callbackName];
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    };
+    
+    document.body.appendChild(script);
+    
+    // Таймаут на случай, если сервер не отвечает
+    setTimeout(function() {
+        if (window[callbackName]) {
+            showNotification('Превышено время ожидания. Пожалуйста, попробуйте еще раз.', 'error');
+            document.body.removeChild(script);
+            delete window[callbackName];
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    }, 10000);
 }
 
 // Стили для анимаций
@@ -178,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Простая валидация
+            // Валидация
             const fullname = form.querySelector('[name="fullname"]').value;
             if (!fullname || fullname.trim() === '') {
                 showNotification('Пожалуйста, укажите ваше имя и фамилию', 'error');
@@ -208,28 +233,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
 // Музыкальный плеер
 document.addEventListener('DOMContentLoaded', function() {
     const musicBtn = document.getElementById('musicToggle');
     const bgMusic = document.getElementById('bgMusic');
-    let isPlaying = false;
+    
+    if (musicBtn && bgMusic) {
+        let isPlaying = false;
 
-    musicBtn.addEventListener('click', function() {
-        if (isPlaying) {
-            bgMusic.pause();
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log('Автовоспроизведение заблокировано');
+                });
+                musicBtn.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        bgMusic.addEventListener('ended', function() {
+            isPlaying = false;
             musicBtn.classList.remove('playing');
-        } else {
-            bgMusic.play().catch(e => {
-                console.log('Автовоспроизведение заблокировано');
-            });
-            musicBtn.classList.add('playing');
-        }
-        isPlaying = !isPlaying;
-    });
-
-    bgMusic.addEventListener('ended', function() {
-        isPlaying = false;
-        musicBtn.classList.remove('playing');
-    });
+        });
+    }
 });
