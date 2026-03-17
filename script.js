@@ -16,8 +16,8 @@ function updateTimer() {
 
     let totalSeconds = Math.floor(diffMs / 1000);
 
-    const weeks = Math.floor(totalSeconds / (7 * 24 * 3600));
-    totalSeconds %= (7 * 24 * 3600);
+    // const weeks = Math.floor(totalSeconds / (7 * 24 * 3600));
+    // totalSeconds %= (7 * 24 * 3600);
 
     const days = Math.floor(totalSeconds / (24 * 3600));
     totalSeconds %= (24 * 3600);
@@ -28,7 +28,7 @@ function updateTimer() {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
-    document.getElementById('weeks').textContent = weeks;
+    // document.getElementById('weeks').textContent = weeks;
     document.getElementById('days').textContent = days;
     document.getElementById('hours').textContent = hours;
     document.getElementById('minutes').textContent = minutes;
