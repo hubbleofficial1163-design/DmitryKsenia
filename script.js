@@ -63,11 +63,12 @@ function showNotification(message, type = 'success') {
 }
 
 // Функция отправки формы через JSONP (работает на GitHub Pages)
+// Функция отправки формы
 function submitForm(form) {
     // Собираем данные из формы
     const formData = new FormData(form);
     
-    // === ИСПРАВЛЕНО: правильный сбор ВСЕХ чекбоксов алкоголя ===
+    // Собираем данные алкоголя
     const alcoholCheckboxes = form.querySelectorAll('input[type="checkbox"][name="alcohol"]:checked');
     const alcoholValues = Array.from(alcoholCheckboxes).map(cb => cb.value);
     
@@ -78,7 +79,8 @@ function submitForm(form) {
         attendance: formData.get('attendance'),
         food: formData.get('food'),
         child: formData.get('child'),
-        wishes: formData.get('wishes') || ''
+        wishes: formData.get('wishes') || '',
+        alcohol: alcoholValues.join(', ') // объединяем все алкоголь в строку
     };
     
     // Показываем индикатор загрузки
@@ -87,82 +89,38 @@ function submitForm(form) {
     submitBtn.textContent = 'Отправка...';
     submitBtn.disabled = true;
     
-    // Генерируем уникальное имя callback функции
-    const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-    
-    // URL вашего Google Apps Script веб-приложения
-    // ЗАМЕНИТЕ НА ВАШ URL ПОСЛЕ ПУБЛИКАЦИИ
+    // URL вашего Google Apps Script
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxNu7lxBi_TO6zjGQzo7II2bDKppkHizajBcEau_BCyiZevdWP-AIZqy3ZFoOgvMp3UXg/exec';
     
-    // Создаем URL с параметрами
-    const params = new URLSearchParams();
-    params.append('callback', callbackName);
+    // Создаем FormData для отправки
+    const sendData = new FormData();
+    sendData.append('fullname', data.fullname);
+    sendData.append('guests', data.guests);
+    sendData.append('attendance', data.attendance);
+    sendData.append('food', data.food);
+    sendData.append('child', data.child);
+    sendData.append('wishes', data.wishes);
+    sendData.append('alcohol', data.alcohol);
     
-    // Добавляем основные данные
-    for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-            params.append(key, data[key]);
-        }
-    }
-    
-    // === ИСПРАВЛЕНО: добавляем КАЖДЫЙ выбранный алкоголь отдельным параметром ===
-    // Это гарантирует, что ВСЕ значения попадут в таблицу
-    if (alcoholValues.length > 0) {
-        alcoholValues.forEach((value, index) => {
-            // Добавляем каждый алкоголь с уникальным ключом
-            params.append(`alcohol_${index}`, value);
-        });
-        // Также добавляем счетчик, чтобы на сервере знали, сколько их
-        params.append('alcoholCount', alcoholValues.length);
-    }
-    
-    const url = scriptURL + '?' + params.toString();
-    
-    // Создаем JSONP callback
-    window[callbackName] = function(response) {
-        try {
-            if (response.result === 'success') {
-                showNotification('Спасибо! Ваши ответы успешно отправлены!', 'success');
-                form.reset();
-            } else {
-                showNotification('Ошибка при отправке: ' + response.message, 'error');
-            }
-        } catch (e) {
-            showNotification('Произошла ошибка при обработке ответа', 'error');
-        } finally {
-            // Удаляем скрипт и callback
-            document.body.removeChild(script);
-            delete window[callbackName];
-            
-            // Восстанавливаем кнопку
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    };
-    
-    // Создаем и добавляем скрипт для JSONP запроса
-    const script = document.createElement('script');
-    script.src = url;
-    script.onerror = function() {
-        showNotification('Ошибка соединения. Пожалуйста, проверьте интернет и попробуйте снова.', 'error');
-        document.body.removeChild(script);
-        delete window[callbackName];
+    // Отправляем через fetch с режимом no-cors
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // Это позволяет обойти CORS, но ответ не прочитать
+        body: sendData
+    })
+    .then(() => {
+        // При no-cors мы не можем прочитать ответ, поэтому просто показываем успех
+        showNotification('Спасибо! Ваши ответы успешно отправлены!', 'success');
+        form.reset();
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        showNotification('Ошибка при отправке. Пожалуйста, попробуйте еще раз.', 'error');
+    })
+    .finally(() => {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-    };
-    
-    document.body.appendChild(script);
-    
-    // Таймаут на случай, если сервер не отвечает
-    setTimeout(function() {
-        if (window[callbackName]) {
-            showNotification('Превышено время ожидания. Пожалуйста, попробуйте еще раз.', 'error');
-            document.body.removeChild(script);
-            delete window[callbackName];
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    }, 10000);
+    });
 }
 
 // Стили для анимаций
