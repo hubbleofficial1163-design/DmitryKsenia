@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300;400;600;700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
     
@@ -46,15 +47,22 @@
                 </audio>
             </div> -->
 
-            <!-- Центральная часть с таймером -->
+
+            <!-- Дата внизу -->
+            <div class="date-section">
+                <span class="day-month">01.08</span>
+                <span class="year">.2026</span>
+            </div>
+
+                        <!-- Центральная часть с таймером -->
             <div class="timer-section">
-                <p class="handwritten">Встречаемся через:</p>
+                <p class="handwritten">До нашей свадьбы осталось:</p>
                 <div class="timer-wrapper">
                     <div class="timer" id="timer">
-                        <div class="timer-item">
+                        <!-- <div class="timer-item">
                             <span class="timer-number" id="weeks">0</span>
                             <span class="timer-label">недель</span>
-                        </div>
+                        </div> -->
                         <div class="timer-item">
                             <span class="timer-number" id="days">0</span>
                             <span class="timer-label">дней</span>
@@ -75,11 +83,6 @@
                 </div>
             </div>
 
-            <!-- Дата внизу -->
-            <div class="date-section">
-                <span class="day-month">01.08</span>
-                <span class="year">2026</span>
-            </div>
         </div>
     </section>
 
@@ -105,6 +108,72 @@
                 <div class="color-circle" style="background-color: #245E38;" title="#245E38"></div>
                 <div class="color-circle" style="background-color: #D7A5B1;" title="#D7A5B1"></div>
                 <div class="color-circle" style="background-color: #E0C397;" title="#E0C397"></div>
+            </div>
+        </div>
+    </section>
+
+        <section class="wishes">
+            <div class="wishes-content">
+                <h2 class="wishes-title">Пожелания</h2>
+                
+                <p class="wishes-text">Ваше присутствие в день нашей свадьбы - самый значимый подарок для нас!</p>
+                <p class="wishes-text">Если Вы хотите поздравить нас не только тёплыми словами, но и материально, мы будем искренне благодарны. Это поможет осуществить наши мечты!</p>
+                
+                <p class="wishes-text flowers-text">Мы хотим сохранить эмоции от нашей свадьбы на долгие месяцы, поэтому вместо букетов на торжество, предлагаем вам поучаствовать в цветочной подписке — это возможность получать ваши поздравления в виде свежих букетов каждую неделю после праздника.</p>
+                
+                <p class="wishes-text">Если вы хотите внести вклад в подписку, просто перейдите по ссылке:</p>
+                
+                <a href="https://bloomles.ru/" class="flower-link" target="_blank" rel="noopener noreferrer">
+                    <button class="flower-button">Перейти к цветочной подписке</button>
+                </a>
+            </div>
+        </section>
+
+
+            <!-- Секция 4: Свадебное расписание -->
+    <section class="schedule">
+        <div class="schedule-content">
+            <h2 class="schedule-title">Свадебное расписание</h2>
+            
+            <div class="schedule-table">
+                <!-- Первое событие: регистрация -->
+                <div class="schedule-row">
+                    <div class="time">15:20</div>
+                    <div class="description">
+                        <span class="event-title">Церемония регистрации в Таганском Дворце бракосочетания</span>
+                        <span class="address">Таганская ул. 44</span>
+                    </div>
+                </div>
+                
+                <!-- Пояснение к регистрации (отдельная строка с отступом) -->
+                <div class="schedule-row note-row">
+                    <div class="time"></div> <!-- пустая ячейка для выравнивания -->
+                    <div class="description note">
+                        Церемония регистрации пройдет до начала основного праздника. Присутствие необязательно, но Вы можете присоединиться к нам при желании
+                    </div>
+                </div>
+                
+                <!-- Второе событие: сбор гостей -->
+                <div class="schedule-row">
+                    <div class="time">16:00</div>
+                    <div class="description">
+                        <span class="event-title">Сбор гостей</span>
+                        <span class="address">Ya-cafe 2, м. Автозаводская, ул. Ленинская Слобода, д. 19, стр. 2</span>
+                    </div>
+                </div>
+                
+                <!-- Третье событие: окончание -->
+                <div class="schedule-row">
+                    <div class="time">23:00</div>
+                    <div class="description">
+                        <span class="event-title">Окончание праздника</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Карта Яндекса -->
+            <div class="yandex-map">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2e22bf355e3504400642aa9c466b07bea4de69387f9e09af246fa1a33f2996&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
             </div>
         </div>
     </section>
@@ -148,7 +217,7 @@
                 
                 <!-- Приезд на мероприятия -->
                 <div class="form-group">
-                    <label>Вы приедете... (Ниже можно ознакомиться с таймингом)</label>
+                    <label>Вы приедете...</label>
                     <div class="radio-group vertical">
                         <label class="radio-label">
                             <input type="radio" name="attendance" value="zags" checked> в ЗАГС
@@ -235,12 +304,12 @@
     </section>
 
         <!-- Секция 4: Свадебное расписание -->
-    <section class="schedule">
+    <!-- <section class="schedule">
         <div class="schedule-content">
             <h2 class="schedule-title">Свадебное расписание</h2>
             
             <div class="schedule-table">
-                <!-- Первое событие: регистрация -->
+                 Первое событие: регистрация 
                 <div class="schedule-row">
                     <div class="time">15:20</div>
                     <div class="description">
@@ -249,15 +318,15 @@
                     </div>
                 </div>
                 
-                <!-- Пояснение к регистрации (отдельная строка с отступом) -->
+                 Пояснение к регистрации (отдельная строка с отступом) --
                 <div class="schedule-row note-row">
-                    <div class="time"></div> <!-- пустая ячейка для выравнивания -->
+                    <div class="time"></div> пустая ячейка для выравнивания 
                     <div class="description note">
                         Церемония регистрации пройдет до начала основного праздника. Присутствие необязательно, но Вы можете присоединиться к нам при желании
                     </div>
                 </div>
                 
-                <!-- Второе событие: сбор гостей -->
+                 Второе событие: сбор гостей --
                 <div class="schedule-row">
                     <div class="time">16:00</div>
                     <div class="description">
@@ -266,7 +335,7 @@
                     </div>
                 </div>
                 
-                <!-- Третье событие: окончание -->
+                 Третье событие: окончание --
                 <div class="schedule-row">
                     <div class="time">23:00</div>
                     <div class="description">
@@ -275,30 +344,30 @@
                 </div>
             </div>
             
-            <!-- Заглушка для карты -->
-            <!-- Карта Яндекса -->
+             Карта Яндекса 
             <div class="yandex-map">
                 <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2e22bf355e3504400642aa9c466b07bea4de69387f9e09af246fa1a33f2996&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
             </div>
         </div>
-    </section>
+    </section> -->
 
         <!-- Секция 5: Пожелания и подарки -->
-    <section class="wishes">
+    <!-- <section class="wishes">
         <div class="wishes-content">
             <h2 class="wishes-title">Пожелания</h2>
             
-            <p class="wishes-text">В качестве подарка мы будем рады вкладу в бюджет нашей семьи. Он точно поможет воплотить нашу мечту в реальность!</p>
+            <p class="wishes-text">Ваше присутствие в день нашей свадьбы - самый значимый подарок для нас!</p>
+            <p class="wishes-text">Если Вы хотите поздравить нас не только тёплыми словами, но и материально, мы будем искренне благодарны. Это поможет осуществить наши мечты!</p>
             
-            <p class="wishes-text flowers-text">Мы мечтаем, чтобы эмоции от нашей свадьбы остались в памяти на долгие месяцы, поэтому вместо букетов от вас на торжество, мы выбрали цветочную подписку — возможность получать ваши поздравления в виде свежих букетов каждую неделю после праздника.</p>
+            <p class="wishes-text flowers-text">Мы хотим сохранить эмоции от нашей свадьбы на долгие месяцы, поэтому вместо букетов на торжество, предлагаем вам поучаствовать в цветочной подписке — это возможность получать ваши поздравления в виде свежих букетов каждую неделю после праздника.</p>
             
-            <p class="wishes-text">Если вы хотите внести вклад в нашу подписку, просто перейдите по ссылке:</p>
+            <p class="wishes-text">Если вы хотите внести вклад в подписку, просто перейдите по ссылке:</p>
             
             <a href="https://bloomles.ru/" class="flower-link" target="_blank" rel="noopener noreferrer">
                 <button class="flower-button">Перейти к цветочной подписке</button>
             </a>
         </div>
-    </section>
+    </section> -->
 
         <!-- Футер с контактами -->
     <footer class="contacts-footer">
