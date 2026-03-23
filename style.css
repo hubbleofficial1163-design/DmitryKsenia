@@ -72,7 +72,7 @@ body, html {
 .timer-wrapper {
     background: rgba(255, 255, 255, 0.4);  /* светло-прозрачная, как просили */
     backdrop-filter: blur(4px);
-    border-radius: 30px;
+    border-radius: 0px;
     padding: 20px 16px;
     max-width: 500px;
     margin: 0 auto;
@@ -831,36 +831,17 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 27vh; /* Используем vh (процент от высоты экрана) вместо пикселей */
+    bottom: 32vh; /* поднял выше (было 27vh) */
     z-index: 10;
     width: auto;
     display: flex;
     justify-content: center;
 }
 
-/* Коррекция для разных высот экрана */
-@media (max-height: 700px) {
-    .music-player {
-        bottom: 22vh; /* Для низких экранов опускаем ниже */
-    }
-}
-
-@media (max-height: 600px) {
-    .music-player {
-        bottom: 28vh; /* Для очень низких экранов ещё ниже */
-    }
-}
-
-@media (min-height: 900px) {
-    .music-player {
-        bottom: 28vh; /* Для высоких экранов поднимаем выше */
-    }
-}
-
 .music-circle {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 120px; /* увеличил с 100px */
+    height: 120px; /* увеличил с 100px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -878,11 +859,12 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 2px;
     font-weight: 500;
+    font-size: 13px; /* чуть увеличил шрифт */
 }
 
 .music-btn {
-    width: 60px;
-    height: 60px;
+    width: 75px; /* увеличил с 60px */
+    height: 75px; /* увеличил с 60px */
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(4px);
@@ -905,13 +887,13 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
 }
 
 .music-btn.playing {
-    background: #3c3c3c;
-    color: white;
+    background: #ffffff;
+    color: rgba(255, 166, 0, 0.438);
 }
 
 .music-icon {
-    width: 30px;
-    height: 30px;
+    width: 38px; /* увеличил с 30px */
+    height: 38px; /* увеличил с 30px */
 }
 
 @keyframes rotate {
@@ -924,24 +906,28 @@ a, button, input[type="button"], input[type="submit"], .radio-label, .checkbox-l
     animation-duration: 6s;
 }
 
-/* Адаптация */
-@media (max-width: 380px) {
+/* Адаптация для мобильных */
+@media screen and (max-width: 479px) {
     .music-circle {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
     }
     
     .music-btn {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
     
     .music-icon {
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
     }
     
-    .rotating-text {
+    .rotating-text text {
         font-size: 10px;
+    }
+    
+    .music-player {
+        bottom: 28vh; /* на мобильных тоже выше */
     }
 }
