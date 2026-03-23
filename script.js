@@ -197,28 +197,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Музыкальный плеер
 document.addEventListener('DOMContentLoaded', function() {
-    const musicBtn = document.getElementById('musicToggle');
+    const musicBtn = document.getElementById('playMusicBtn');
     const bgMusic = document.getElementById('bgMusic');
     
     if (musicBtn && bgMusic) {
         let isPlaying = false;
-
+        
         musicBtn.addEventListener('click', function() {
             if (isPlaying) {
                 bgMusic.pause();
                 musicBtn.classList.remove('playing');
             } else {
                 bgMusic.play().catch(e => {
-                    console.log('Автовоспроизведение заблокировано');
+                    console.log('Автовоспроизведение заблокировано. Нажмите на страницу для включения музыки');
                 });
                 musicBtn.classList.add('playing');
             }
             isPlaying = !isPlaying;
         });
-
+        
         bgMusic.addEventListener('ended', function() {
-            isPlaying = false;
-            musicBtn.classList.remove('playing');
+            // Зацикливание (если не стоит loop)
+            if (bgMusic.loop) return;
+            bgMusic.currentTime = 0;
+            bgMusic.play();
         });
     }
 });
