@@ -17,35 +17,33 @@
         <div class="hero-content">
 
             
-
+            <audio id="bgMusic" preload="auto" loop>
+                <source src="1.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио.
+            </audio>
             <!-- Имена в столбик сверху -->
             <div class="names-column">
                 <span class="name">ДМИТРИЙ</span>
                 <span class="name">КСЕНИЯ</span>
             </div>
 
-            <!-- <div class="music-player">
+            <div class="music-player">
                 <div class="music-circle">
-                    <svg class="rotating-text" viewBox="0 0 100 100">
-                        <defs>
-                            <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
-                        </defs>
-                        <text font-size="12">
-                            <textPath href="#circle" fill="white" font-family="Caveat, cursive">
-                                • ВКЛЮЧИТЕ МУЗЫКУ • ВКЛЮЧИТЕ МУЗЫКУ •
+                    <svg class="rotating-text" viewBox="0 0 200 200">
+                        <path id="circlePath" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="none"/>
+                        <text>
+                            <textPath href="#circlePath" startOffset="0%">
+                                ♪ ВКЛЮЧИТЕ МУЗЫКУ ♪ ВКЛЮЧИТЕ МУЗЫКУ ♪ ВКЛЮЧИТЕ МУЗЫКУ 
                             </textPath>
                         </text>
                     </svg>
-                    <button class="music-btn" id="musicToggle">
-                        <svg class="music-icon" viewBox="0 0 24 24">
-                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="currentColor"/>
+                    <button class="music-btn" id="playMusicBtn">
+                        <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
                         </svg>
                     </button>
                 </div>
-                <audio id="bgMusic" loop>
-                    <source src="1.mp3" type="audio/mpeg">
-                </audio>
-            </div> -->
+            </div>
 
 
             <!-- Дата внизу -->
@@ -123,7 +121,7 @@
                 
                 <p class="wishes-text">Если вы хотите внести вклад в подписку, просто перейдите по ссылке:</p>
                 
-                <a href="https://bloomles.ru/" class="flower-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://bloomles.ru/product/ksenia-dmitrii" class="flower-link" target="_blank" rel="noopener noreferrer">
                     <button class="flower-button">Перейти к цветочной подписке</button>
                 </a>
             </div>
@@ -162,6 +160,13 @@
                     </div>
                 </div>
                 
+                <div class="schedule-row">
+                    <div class="time">16:30</div>
+                    <div class="description">
+                        <span class="event-title">Начало программы </span>
+                    </div>
+                </div>
+
                 <!-- Третье событие: окончание -->
                 <div class="schedule-row">
                     <div class="time">23:00</div>
