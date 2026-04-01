@@ -79,12 +79,12 @@ function submitForm(form) {
     submitBtn.disabled = true;
     
     // URL вашего Google Apps Script
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNu7lxBi_TO6zjGQzo7II2bDKppkHizajBcEau_BCyiZevdWP-AIZqy3ZFoOgvMp3UXg/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbylKEhqXyCKaUtoX30KGzXSBWAh8JT7AoSl9MOkeXvVyEz3ki9Hg5dA0HNU_8YQivE3vA/exec';
     
     // Создаем объект с данными
     const data = {
         fullname: formData.get('fullname') || '',
-        guests: formData.get('guests') || '',
+        // guests: formData.get('guests') || '',
         attendance: formData.get('attendance') || '',
         food: formData.get('food') || '',
         child: formData.get('child') || '',
